@@ -44,13 +44,17 @@ body{
 }
 /* ---------- animated background ---------- */
 .bg{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.orb{position:absolute;border-radius:50%;filter:blur(70px);opacity:.55;will-change:transform}
-.orb.o1{width:46vmax;height:46vmax;background:var(--orb1);top:-14vmax;right:-10vmax;animation:float1 18s ease-in-out infinite}
-.orb.o2{width:38vmax;height:38vmax;background:var(--orb2);bottom:-12vmax;left:-10vmax;animation:float2 22s ease-in-out infinite}
-.orb.o3{width:28vmax;height:28vmax;background:var(--orb3);top:38%;left:34%;opacity:.35;animation:float3 26s ease-in-out infinite}
-@keyframes float1{50%{transform:translate(-8vmax,10vmax) scale(1.12)}}
-@keyframes float2{50%{transform:translate(10vmax,-8vmax) scale(1.1)}}
-@keyframes float3{50%{transform:translate(-12vmax,-6vmax) scale(.85)}}
+.bg{background:radial-gradient(60vmax 40vmax at 85% 8%,rgba(79,70,229,.28),transparent 70%),radial-gradient(55vmax 40vmax at 10% 95%,rgba(6,182,212,.22),transparent 70%)}
+.ball{position:absolute;top:50%;left:50%;width:0;height:0;will-change:transform}
+.bx{animation:ox calc(var(--T)*1s) ease-in-out infinite alternate;animation-delay:calc(var(--d)*-1s)}
+.by{animation:oy calc(var(--T)*1s) ease-in-out infinite alternate;animation-delay:calc((var(--d) + var(--T)/2)*-1s)}
+.dot-ball{position:absolute;width:var(--s);height:var(--s);margin:calc(var(--s)/-2) 0 0 calc(var(--s)/-2);border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0,var(--c) 28%,color-mix(in srgb,var(--c) 55%,#000) 100%);
+  box-shadow:0 0 calc(var(--s)*.6) color-mix(in srgb,var(--c) 70%,transparent),inset -6px -8px 18px rgba(0,0,0,.25);opacity:.92}
+@keyframes ox{from{transform:translateX(calc(var(--ax)*-1))}to{transform:translateX(var(--ax))}}
+@keyframes oy{from{transform:translateY(calc(var(--ay)*-1))}to{transform:translateY(var(--ay))}}
+.bg{--ax:46vw;--ay:44vh}
+@media (max-width:760px){.bg{--ax:42vw;--ay:42vh}}
 .grain{position:absolute;inset:0;opacity:.06;background-image:radial-gradient(var(--text) 1px,transparent 1px);background-size:26px 26px}
 
 /* ---------- views ---------- */
@@ -189,7 +193,7 @@ h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;line-height:1.25;
 </style>
 </head>
 <body>
-<div class="bg" aria-hidden="true"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div><div class="grain"></div></div>
+<div class="bg" aria-hidden="true"><div class="ball" style="--T:26;--d:0"><div class="bx"><div class="by"><i class="dot-ball" style="--s:70px;--c:#6366f1"></i></div></div></div><div class="ball" style="--T:26;--d:6.5"><div class="bx"><div class="by"><i class="dot-ball" style="--s:46px;--c:#22d3ee"></i></div></div></div><div class="ball" style="--T:34;--d:3"><div class="bx"><div class="by"><i class="dot-ball" style="--s:90px;--c:#ec4899"></i></div></div></div><div class="ball" style="--T:22;--d:11"><div class="bx"><div class="by"><i class="dot-ball" style="--s:34px;--c:#facc15"></i></div></div></div><div class="ball" style="--T:30;--d:17"><div class="bx"><div class="by"><i class="dot-ball" style="--s:58px;--c:#34d399"></i></div></div></div><div class="ball" style="--T:20;--d:4"><div class="bx"><div class="by"><i class="dot-ball" style="--s:40px;--c:#a78bfa"></i></div></div></div><div class="ball" style="--T:38;--d:21"><div class="bx"><div class="by"><i class="dot-ball" style="--s:76px;--c:#fb7185"></i></div></div></div><div class="grain"></div></div>
 
 <!-- ======================= صفحه اول ======================= -->
 <main class="view active" id="home">
@@ -240,7 +244,7 @@ h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;line-height:1.25;
         <h2 class="p-name rv" style="--i:2">امیرحسین یعقوبی</h2>
         <p class="p-sub rv" style="--i:3">دانشجوی حسابداری · دانشگاه شهید چمران · ترم ۵</p>
         <div class="p-tags rv" style="--i:4">
-          <span class="tag">حسابداری</span><span class="tag">اتوماسیون هوشمند</span><span class="tag">برنامه‌نویسی و اپلیکیشن وب</span><span class="tag">سخت‌افزار و شبکه</span>
+          <span class="tag">حسابداری</span><span class="tag">اتوماسیون هوشمند</span><span class="tag">برنامه‌نویسی واپلیکیشن وب</span><span class="tag">سخت‌افزار و شبکه</span>
         </div>
       </div>
     </header>
@@ -275,9 +279,9 @@ h1{font-size:clamp(2rem,5vw,3.4rem);font-weight:900;line-height:1.25;
       <section class="card rv" style="--i:9">
         <h2><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 5l-4 14"/></svg>تخصص فنی</h2>
         <ul>
-          <li>برنامه‌نویسی وب و آیفون</li>
+          <li>برنامه‌نویسی وب</li>
           <li>تخصص کامل در راه‌اندازی سیستم و کامپیوتر</li>
-           <li>ادیت تدوین فیلم و عکس سینمایی و حرفه ای </li>
+          <li>ادیت و تدوین فیلم و عکس سینمایی حرفه ای</li>
         </ul>
       </section>
     </div>
